@@ -12,7 +12,7 @@ namespace Byter
 {
     public partial class Form1 : Form
     {
-
+        List<string> filesList;
 
         public Form1()
         {
@@ -37,8 +37,8 @@ namespace Byter
 
         private void startButton1_Click(object sender, EventArgs e)
         {
-            operations.Getfiles(pathTextBox1.Text, fileExtensionTextBox1.Text);
-
+            filesList = operations.Getfiles(pathTextBox1.Text, fileExtensionTextBox1.Text);
+            operations.replacer(filesList, bytesStringrichTextBox1.Text, bytesStringrichTextBox2.Text);
         }
     }
 }

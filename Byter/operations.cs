@@ -27,9 +27,10 @@ namespace Byter
             }
         }
 
-        public static void Getfiles(string path, string extension)
+        public static List<string> Getfiles(string path, string extension)
         {
             List<string> dirs = Directory.GetDirectories(path).ToList();
+            List<string> files = new List<string>();
             int counter = 0;
             while (counter < dirs.Count)
             {
@@ -40,11 +41,20 @@ namespace Byter
                 {
                     Console.WriteLine(e);
                 }
+
+                try
+                {
+                    files.AddRange(Directory.GetFiles(dirs[counter], ("*" + extension)));
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
                 counter++;
             }
 
-            List<string> files = new List<string>();
-            foreach(string s in dirs)
+
+            /*foreach(string s in dirs)
             {
                 try
                 {
@@ -59,7 +69,27 @@ namespace Byter
             foreach(string s in files)
             {
                 Console.WriteLine(s);
+            }*/
+
+            return files;
+        }
+
+        public static void replacer(List<string> files, string s1, string s2)
+        {
+            foreach(string s in files)
+            {
+                byte[] buff = File.ReadAllBytes(s);
+                
+                for(int i = 0; i < 1; i++)
+                {
+                    Console.Write(buff[i].ToString("X"));
+                    
+
+                }
+                Console.WriteLine("");
             }
         }
+
+
     }
 }
